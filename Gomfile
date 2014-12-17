@@ -1,0 +1,3 @@
+gom "github.com/codegangsta/cli"
+gom "github.com/mitchellh/go-homedir"
+gom "github.com/motemen/go-colorine"

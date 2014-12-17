@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"regexp"
 	"runtime"
 	"strings"
 	"syscall"
@@ -126,6 +127,12 @@ OPTIONS:
 
 func doGet(c *cli.Context) {
 	argURL := c.Args().Get(0)
+
+	// start: patched by kohkimakimoto
+	reg := regexp.MustCompile(`:[0-9]+`)
+	argURL = reg.ReplaceAllLiteralString(argURL, "")
+	// end: patched by kohkimakimoto
+
 	doUpdate := c.Bool("update")
 	isShallow := c.Bool("shallow")
 
