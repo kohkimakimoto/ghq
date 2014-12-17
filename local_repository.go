@@ -6,6 +6,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/mitchellh/go-homedir"
@@ -47,6 +48,11 @@ func LocalRepositoryFromURL(remoteURL *url.URL) *LocalRepository {
 		[]string{remoteURL.Host}, strings.Split(remoteURL.Path, "/")...,
 	)
 	relPath := strings.TrimSuffix(path.Join(pathParts...), ".git")
+
+	// start: patched by kohkimakimoto
+	reg := regexp.MustCompile(`:[0-9]+`)
+	relPath = reg.ReplaceAllLiteralString(relPath, "")
+	// end: patched by kohkimakimoto
 
 	var localRepository *LocalRepository
 

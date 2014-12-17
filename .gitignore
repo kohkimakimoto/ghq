@@ -1,2 +1,4 @@
 /ghq
 /_vendor
+.tags
+.tags_sorted_by_file
